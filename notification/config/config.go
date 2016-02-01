@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
+	"strconv"
 )
 
 type configValue struct {
@@ -53,6 +54,15 @@ func (c *Config) GetEmailHost() string {
 
 func (c *Config) GetEmailReceiver() string {
 	return c.configData["email.receiver"].(string)
+}
+
+func (c *Config) GetEmailInterval() int {
+	interval := c.configData["email.interval"].(string)
+	i, err := strconv.Atoi(interval)
+	if err != nil {
+		return 10
+	}
+	return i
 }
 
 func (c *Config) GetDoubanUser() string {

@@ -53,7 +53,8 @@ func main() {
 
 	douban := watcher.Douban{}
 	douban.Init(c.GetDoubanUser())
-	tickCheckNewNotes(20, douban, e, c)
+	interval := time.Duration(c.GetEmailInterval()) * time.Minute
+	tickCheckNewNotes(interval, douban, e, c)
 
 	fmt.Println("send email end")
 }
