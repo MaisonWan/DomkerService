@@ -81,7 +81,7 @@ func getContent(url string) (content string, statusCode int) {
 }
 
 var noteIndexItem = regexp.MustCompile(`<a href="/note/(.+)/">.*</a>
-  <span>\s.*</span>`)
+  <span>(\s*\(\d+\)\s*)?\s*.*</span>`)
 
 var noteHrefItem = regexp.MustCompile(`href=".*"`)
 
@@ -97,6 +97,7 @@ func getNotes(content string) []Note {
 	for _, item := range matches {
 		note := getNote(item[0])
 		notes = append(notes, note)
+		//fmt.Println(note.Subject)
 	}
 	return notes
 }
